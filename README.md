@@ -1,3 +1,5 @@
+📌 내용 정리 노션 페이지 https://www.notion.so/kim602/Weather-API-HTTPS-13f461e237eb8077a25aff3e30e3e1cb
+
 # 날씨 관리 API (Weather Management API)
 
 이 프로젝트는 **날씨 관리 시스템**으로, CRUD(Create, Read, Update, Delete) 기능을 제공하는 RESTful API와 간단한 사용자 인터페이스(UI)를 통해 날씨 데이터를 관리할 수 있습니다.
