@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Management</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weather Management System</h1>
+        </header>
+
+        <section>
+            <h2>Weather Data</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Region</th>
+                        <th>Weather</th>
+                        <th>Temperature (°C)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="weather : ${weatherList}">
+                        <td th:text="${weather.id}"></td>
+                        <td th:text="${weather.date}"></td>
+                        <td th:text="${weather.region}"></td>
+                        <td th:text="${weather.weather}"></td>
+                        <td th:text="${weather.temperature}"></td>
+                        <td>
+                            <!-- 수정 및 삭제 버튼 -->
+                            <button class="edit" th:onclick="'editWeather(' + ${weather.id} + ')'">Edit</button>
+                            <button class="delete" th:onclick="'deleteWeather(' + ${weather.id} + ')'">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Add / Edit Weather Data</h2>
+            <form id="weatherForm">
+                <input type="hidden" id="id" name="id">
+                <label for="date">Date (YYYY-MM-DD):</label>
+                <input type="text" id="date" name="date" required>
+                <label for="region">Region:</label>
+                <input type="text" id="region" name="region" required>
+                <label for="weather">Weather:</label>
+                <input type="text" id="weather" name="weather" required>
+                <label for="temperature">Temperature (°C):</label>
+                <input type="number" id="temperature" name="temperature" required>
+                <button type="button" onclick="submitForm()">Submit</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // 데이터 저장 및 수정
+        function submitForm() {
+            const id = document.getElementById("id").value;
+            const method = id ? "PUT" : "POST";
+            const url = id ? `/api/weather/${id}` : "/api/weather";
+
+            const data = {
+                date: document.getElementById("date").value,
+                region: document.getElementById("region").value,
+                weather: document.getElementById("weather").value,
+                temperature: parseFloat(document.getElementById("temperature").value),
+            };
+
+            fetch(url, {
+                method: method,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error saving weather data");
+                    }
+                    return response.json();
+                })
+                .then(() => {
+                    alert("Weather data saved successfully!");
+                    location.reload();
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+
+        // 데이터 수정
+        function editWeather(id) {
+            fetch(`/api/weather/${id}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error fetching weather data");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    document.getElementById("id").value = data.id;
+                    document.getElementById("date").value = data.date;
+                    document.getElementById("region").value = data.region;
+                    document.getElementById("weather").value = data.weather;
+                    document.getElementById("temperature").value = data.temperature;
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+
+        // 데이터 삭제
+        function deleteWeather(id) {
+            fetch(`/api/weather/${id}`, {
+                method: "DELETE",
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error deleting weather data");
+                    }
+                    alert("Weather data deleted successfully!");
+                    location.reload();
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>
