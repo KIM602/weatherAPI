@@ -1,4 +1,4 @@
-📌 내용 정리 노션 페이지 https://www.notion.so/kim602/Weather-API-HTTPS-13f461e237eb8077a25aff3e30e3e1cb
+📌 내용 정리 노션 페이지 https://www.notion.so/kim602/Weather-API-HTTPS-13f461e237eb8077a25aff3e30e3e1cb <br />
 📌 PPT https://www.canva.com/design/DAGWFnyq2Mk/RyX2Zd3klmethhHVmlRwSw/edit?utm_content=DAGWFnyq2Mk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 # 날씨 관리 API (Weather Management API)
