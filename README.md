@@ -99,5 +99,5 @@
 - JWT 인증을 추가하여 API 보안 강화
 - 날씨 예보와 같은 추가 기능을 제공할 수 있도록 API 확장
 - 사용자 경험을 개선하기 위한 프론트엔드 향상
-<br/>
-![image](https://github.com/user-attachments/assets/b5ed5dd3-67a8-4cb5-8a46-adfc7aab54ad)
+![image](https://github.com/user-attachments/assets/e7afb95d-775f-4198-9899-b29d5f196cda)
+
